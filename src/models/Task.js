@@ -16,8 +16,10 @@ const TaskSchema = new Schema({
     default: false,
   },
 }, {
-  timestamps: true,
+  timestamps: false,
   versionKey: false,
 })
-const TaskModel = model('Task', TaskSchema)
+
+const TaskModel = model('Task', TaskSchema);
+
 export default TaskModel;

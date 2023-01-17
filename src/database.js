@@ -6,7 +6,7 @@ import { connect } from "mongoose";
       'mongodb://localhost:27017/crud-mongo',
       { 
         useNewUrlParser: true,
-        useUnifiedTopology: true 
+        useUnifiedTopology: true,
       }
     );
     console.log("Db connectect to", db.connection.name);

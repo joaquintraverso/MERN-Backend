@@ -1,5 +1,6 @@
 import { request, response, next } from "express";
 import TaskModel from "../models/Task";
+import UserModel from "../models/User";
 
 export const getAllTasks = async (req, res, next) => {
   try {
@@ -40,10 +41,21 @@ export const getTask = async (req, res, next) => {
 }
 
 export const createTask = async (req, res, next) => {
-  const { title, description } = req.body;
+  const { title, description, userId } = req.body;
+
+  const user = await UserModel.findById(userId);
+
   try {
-    const task = new TaskModel({ title, description })
-    await task.save();
+    const task = new TaskModel({
+      title,
+      description,
+      user: user._id
+    })
+
+    const savedTask = await task.save();
+
+    user.tasks = user.tasks.concat(savedTask._id)
+    await user.save();
 
     if (task) {
       var msg = "task created correctly"
