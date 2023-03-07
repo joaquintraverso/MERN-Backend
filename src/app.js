@@ -7,6 +7,8 @@ import cors from "cors";
 //inicialización express
 const app = express();
 
+app.use(cors());
+
 app.use(morgan('dev'))
 
 app.use(express.json());
@@ -15,6 +17,5 @@ app.use(express.json());
 app.use(taskRoutes);
 app.use(userRoutes);
 
-app.use(cors());
 
 export default app;
